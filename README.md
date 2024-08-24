@@ -4,7 +4,7 @@
   * run datacollection.ino, change baseFileName and fileNumber for different groups of data.
   * both ADC and I2S microphone's .wav audios and MFCC features will be saved.(you could use the .wav files for edge impulse, or directly use MFCC features to train the model in jupyternotebook)
 2. model
-  * in the model folder, you can use the recorded MFCC features to train both the keywords spotting model and localization model and save them as .h file.
-  * Then use get_weight_model.jp
+  * in the model folder, you can use the recorded MFCC features to train both the keywords spotting model and localization model and save them as .h5 file (in keywords_model.ipynb and localization.ipynb).
+  * Then use get_model_weights.ipynb to save weights from .h5 models.
 
    
