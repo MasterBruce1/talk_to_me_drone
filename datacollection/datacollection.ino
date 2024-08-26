@@ -164,10 +164,10 @@ void save_i2s_wav(String i2sfileName){
     generate_wav_header(wav_header, recorded_sample_size, I2S_SAMPLE_RATE);
     file.write(wav_header, WAV_HEADER_SIZE);
     // Increase volume (if needed)
-    for (uint32_t i = 0; i < recorded_sample_size; i += 2) {
-        int16_t* sample = (int16_t*)(i2s_data + i);
-        *sample = *sample << 1;  // Increase volume by 6dB
-    }
+    // for (uint32_t i = 0; i < recorded_sample_size; i += 2) {
+    //     int16_t* sample = (int16_t*)(i2s_data + i);
+    //     *sample = *sample << 1;  // Increase volume by 6dB
+    // }
     // Write data to the file
     file.write(i2s_data, recorded_sample_size);
     file.close();
