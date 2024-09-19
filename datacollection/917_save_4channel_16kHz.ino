@@ -11,36 +11,36 @@ int file_counter = 0;
 const unsigned long bufferSize = 16000; //16000
 
 #define SAMPLES_PER_SECOND 16000   // 16000
-#define READ_LEN 1024              //
-#define NUM_CHANNELS 4             // 
+#define READ_LEN 1024              
+#define NUM_CHANNELS 4              
 #define SAMPLE_BITS 16
 
-//
+
 static adc_channel_t channel[NUM_CHANNELS] = {
-    ADC_CHANNEL_0,  //
-    ADC_CHANNEL_1,  // 
-    ADC_CHANNEL_2,  //
-    ADC_CHANNEL_3   //
+    ADC_CHANNEL_0,  
+    ADC_CHANNEL_1,   
+    ADC_CHANNEL_2,  
+    ADC_CHANNEL_3   
 };
 static TaskHandle_t s_task_handle;
 static SemaphoreHandle_t dma_semaphore;
 adc_continuous_handle_t handle = NULL;
-unsigned long start_time = 0;  // 
-unsigned long end_time = 0;    // 
-// 
+unsigned long start_time = 0;  
+unsigned long end_time = 0;    
+
 uint16_t buffer1[SAMPLES_PER_SECOND];
 uint16_t buffer2[SAMPLES_PER_SECOND];
 uint16_t buffer3[SAMPLES_PER_SECOND];
 uint16_t buffer4[SAMPLES_PER_SECOND];
-uint16_t sample_index1 = 0, sample_index2 = 0, sample_index3 = 0, sample_index4 = 0;  // 
+uint16_t sample_index1 = 0, sample_index2 = 0, sample_index3 = 0, sample_index4 = 0;  
 
-#define PCM_BUFFER_SIZE SAMPLES_PER_SECOND  //
-int16_t pcmBuffer1[PCM_BUFFER_SIZE];  // 
+#define PCM_BUFFER_SIZE SAMPLES_PER_SECOND  
+int16_t pcmBuffer1[PCM_BUFFER_SIZE];  
 int16_t pcmBuffer2[PCM_BUFFER_SIZE];
 int16_t pcmBuffer3[PCM_BUFFER_SIZE];
 int16_t pcmBuffer4[PCM_BUFFER_SIZE];
 
-//
+
 static bool IRAM_ATTR adcComplete(adc_continuous_handle_t handle, const adc_continuous_evt_data_t *edata, void *user_data) {
     BaseType_t mustYield = pdFALSE;
     vTaskNotifyGiveFromISR(s_task_handle, &mustYield);
@@ -49,8 +49,8 @@ static bool IRAM_ATTR adcComplete(adc_continuous_handle_t handle, const adc_cont
 
 static void adc_init(adc_channel_t *channel, uint8_t channel_num) {
     adc_continuous_handle_cfg_t adc_config = {
-        .max_store_buf_size = 8192,   // 
-        .conv_frame_size = READ_LEN,  //
+        .max_store_buf_size = 8192,    
+        .conv_frame_size = READ_LEN,  
     };
     ESP_ERROR_CHECK(adc_continuous_new_handle(&adc_config, &handle));
     
