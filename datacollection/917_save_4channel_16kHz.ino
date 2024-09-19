@@ -15,7 +15,7 @@ const unsigned long bufferSize = 16000; //16000
 #define NUM_CHANNELS 4             // 
 #define SAMPLE_BITS 16
 
-// ADC引脚和通道
+//
 static adc_channel_t channel[NUM_CHANNELS] = {
     ADC_CHANNEL_0,  //
     ADC_CHANNEL_1,  // 
